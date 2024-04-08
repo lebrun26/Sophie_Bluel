@@ -1,0 +1,121 @@
+body {
+	max-width: 1140px;
+	margin:auto;
+	font-family: 'Work Sans' ;
+	font-size: 14px;
+    background-color: #FFFEF8;
+}
+/* Header */
+header {
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 0
+}
+h1{
+	display: flex;
+	flex-direction: column;
+	font-family: 'Syne';
+	font-size: 22px;
+	font-weight: 800;
+	color: #B1663C
+}
+
+h1 > span {
+	font-family: 'Work Sans';
+	font-size:10px;
+	letter-spacing: 0.1em;
+;
+}
+nav ul {
+	display: flex;
+	align-items: center;
+	list-style-type: none;
+
+}
+nav li {
+	padding: 0 10px;
+	font-size: 1.2em;
+}
+nav li a{
+	text-decoration: none;
+	color: black;
+}
+nav li a:hover{
+    color: #B1663C;
+}
+/* Une fois tout les href mis on peut enlever */ 
+li:hover {
+	color: #B1663C;
+}
+
+/* Main */
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+h2{
+    display: flex;
+    justify-content: center;
+    color: #1D6154;
+    font-family: 'Syne', sans-serif;
+    font-size: 30px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+#email{
+    margin-right: 88%;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 14px;
+    font-family: 'Work Sans', sans-serif;
+}
+#input_email{
+    width: 379px;
+    height: 45px;
+    box-shadow: 0px 4px 14px 0px #00000017;
+    border: none;
+    margin-bottom: 10px;
+}
+#mdps{
+    margin-right: 75%;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 14px;
+    font-family: 'Work Sans', sans-serif;
+}
+#input_password{
+    width: 379px;
+    height: 45px;
+    box-shadow: 0px 4px 14px 0px #00000017;
+    border: none;
+    margin-bottom: 10px;
+}
+.btn_submit{
+    width: 179px;
+    border: 1px solid;
+    border-radius: 15px;
+    padding: 7px 15px 7px 15px;
+    background-color: #1D6154;
+    color: white;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+main p{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Footer */
+
+footer nav ul {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 370px;
+}
