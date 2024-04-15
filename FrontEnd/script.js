@@ -2,8 +2,6 @@ const reponse = await fetch("http://localhost:5678/api/works")
 const projet = await reponse.json()
 const reponsecategory = await fetch("http://localhost:5678/api/categories")
 const categories = await reponsecategory.json()
-console.log(projet)
-console.log(categories)
 
 // Appel et mise en place des projets pour la page d'accueil
 const gallery = document.querySelector(".gallery")
@@ -44,7 +42,6 @@ btnTous.addEventListener("click", () =>{
     })
     document.querySelector(".gallery").innerHTML = ""
     genereProjet(projet)
-    console.log(projet)
 })
 
 categories.forEach(category => {
@@ -71,3 +68,5 @@ portfolio.appendChild(filter)
 // je met la div crée filter avant la div gallery
 portfolio.insertBefore(filter, gallery)
 
+let token = window.localStorage.getItem("token")
+console.log(token)

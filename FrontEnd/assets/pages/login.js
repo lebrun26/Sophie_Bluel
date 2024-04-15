@@ -30,22 +30,21 @@ function sendLogin(){
             body: chargeUtile
         })
         .then(reponse => {
-            if (reponse.status === 200) {
-                window.location.href= "../../index.html"
-            }
-            if (reponse.status === 404) {
-                throw new Error("User not found.")
-            }
-            if (reponse.status === 401) {
-                throw new Error("Not Authorized.")
-            }
-            return reponse.json();
+            // Traiter les données de la réponse
+            console.log(reponse)
+            return reponse.json()
         })
         .then(data => {
-            // Traiter les données de la réponse
-            console.log(data);
-            window.localStorage.setItem("token", data)
             console.log(data)
+            window.localStorage.setItem("token", data.token)
+            console.log("ok")  
+            window.location.href= "/FrontEnd"
+            if (data.status === 404) {
+                throw new Error("User not found.")
+            }
+            else if (data.status === 401) {
+                throw new Error("Not Authorized.")
+            }
         })
         .catch(error => {
             console.error(error);
