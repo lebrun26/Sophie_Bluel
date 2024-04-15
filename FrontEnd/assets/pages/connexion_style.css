@@ -112,6 +112,12 @@ main p{
     cursor: pointer;
 }
 
+.loginError p{
+    text-decoration: none;
+    color: red;
+    cursor: default;
+}
+
 /* Footer */
 
 footer nav ul {

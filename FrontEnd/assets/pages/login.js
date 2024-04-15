@@ -2,7 +2,7 @@
 
 function sendLogin(){
     const formulaireLogin = document.querySelector(".form_login")
-    formulaireLogin.addEventListener("submit", (event) =>{
+    formulaireLogin.addEventListener("submit", async (event) =>{
         event.preventDefault()
 
         // Récupération des valeurs saisies par l'utilisateur
@@ -24,31 +24,23 @@ function sendLogin(){
         const chargeUtile = JSON.stringify(login)
 
         // Appel de la fonction fetch avec toutes les informations nécessaires
-        fetch("http://localhost:5678/api/users/login", {
+        const reponse = await fetch("http://localhost:5678/api/users/login", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: chargeUtile
         })
-        .then(reponse => {
-            // Traiter les données de la réponse
-            console.log(reponse)
-            return reponse.json()
-        })
-        .then(data => {
-            console.log(data)
-            window.localStorage.setItem("token", data.token)
-            console.log("ok")  
-            window.location.href= "/FrontEnd"
-            if (data.status === 404) {
-                throw new Error("User not found.")
-            }
-            else if (data.status === 401) {
-                throw new Error("Not Authorized.")
-            }
-        })
-        .catch(error => {
-            console.error(error);
-        });
+       if(reponse.status === 200){
+            const data = await reponse.json()
+            const token = data.token
+            window.localStorage.setItem("token", token)
+            window.location.href = "../../index.html"
+       }
+       else{
+            const loginError = document.querySelector(".loginError")
+            const p = document.createElement("p")
+            p.textContent = "Email et/ou Mot de passe incorrect"
+            loginError.appendChild(p)
+       }
     })
 }
 sendLogin()
