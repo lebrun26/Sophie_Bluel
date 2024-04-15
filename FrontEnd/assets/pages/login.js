@@ -37,9 +37,12 @@ function sendLogin(){
        }
        else{
             const loginError = document.querySelector(".loginError")
-            const p = document.createElement("p")
-            p.textContent = "Email et/ou Mot de passe incorrect"
-            loginError.appendChild(p)
+            if (!loginError.querySelector(".error-message")) {
+                const p = document.createElement("p")
+                p.className = "error-message"
+                p.textContent = "Email et/ou Mot de passe incorrect"
+                loginError.appendChild(p)
+            }
        }
     })
 }

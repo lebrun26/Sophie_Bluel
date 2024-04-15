@@ -57,8 +57,36 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 110px 0 50px 0;
 }
+/* Bandeau supérieur */
+.admin_mode{
+	/* ici il faut mettre le display none et ne pas oublier de remettre
+	le margin de  header a 50px 0 quand on enleve le mode edition*/
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: black;
+	width: 100%;
+	height: 59px;
+	align-content: center;
+}
+.admin_mode p{
+	color: white;
+	display: flex;
+	justify-content: center;
+
+}
+.admin_mode i{
+	display: flex;
+	justify-content: center;
+	color: white;
+}
+.admin_mode i p{
+	font-family: "Work Sans", sans-serif;
+	margin-left: 5px;
+}
+/* Fin bandeau supérieur */
 section {
 	margin: 50px 0
 }
@@ -85,6 +113,32 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+/* H2 bouton modifier admin */
+.modif_admin{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 90px;
+}
+.modif_admin button{
+	/* Ici il faut appliquer le display none */
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+.modif_admin i{
+	display: flex;
+	justify-content: center;
+	color: black;
+	font-size: 14px;
+	margin-left: 15px;
+}
+.modif_admin i p{
+	font-family: "Work Sans", sans-serif;
+	margin-left: 5px;
+}
+
+/* Fin */ 
 nav ul {
 	display: flex;
 	align-items: center;
