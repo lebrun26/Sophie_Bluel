@@ -68,5 +68,22 @@ portfolio.appendChild(filter)
 // je met la div crée filter avant la div gallery
 portfolio.insertBefore(filter, gallery)
 
-let token = window.localStorage.getItem("token")
+// Ajout ou suppression du mode admin
+const token = window.localStorage.getItem("token")
 console.log(token)
+function adminMode(){
+    const headBandAdmin = document.querySelector(".admin_mode")
+    const modifAdmin = document.querySelector("#btn_modif")
+    const header = document.querySelector("header")
+    const isAdmin = token !== null && token !== undefined
+    if(isAdmin){
+        headBandAdmin.classList.remove("admin_mode_disabled")
+        modifAdmin.classList.remove("admin_mode_disabled")
+    }
+    else{
+        headBandAdmin.classList.add("admin_mode_disabled")
+        modifAdmin.classList.add("admin_mode_disabled")
+        header.classList.add("header_origin_margin")
+    }
+}
+adminMode()

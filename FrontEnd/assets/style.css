@@ -59,10 +59,11 @@ header {
 	justify-content: space-between;
 	margin: 110px 0 50px 0;
 }
+.header_origin_margin{
+	margin: 50px 0px;
+}
 /* Bandeau supérieur */
 .admin_mode{
-	/* ici il faut mettre le display none et ne pas oublier de remettre
-	le margin de  header a 50px 0 quand on enleve le mode edition*/
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -70,6 +71,11 @@ header {
 	width: 100%;
 	height: 59px;
 	align-content: center;
+	display: block;
+}
+/* Ajout ou suppresion de la class en fonction du token ou non */
+.admin_mode_disabled{
+	display: none;
 }
 .admin_mode p{
 	color: white;
