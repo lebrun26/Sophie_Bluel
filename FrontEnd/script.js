@@ -87,3 +87,29 @@ function adminMode(){
     }
 }
 adminMode()
+
+// Système de logout
+
+function logInOut(){
+    const btnLogin = document.querySelector(".login") 
+    const storedToken = window.localStorage.getItem("token")
+
+    btnLogin.addEventListener("click", () => {
+        if(storedToken){
+            window.localStorage.removeItem("token")
+            btnLogin.textContent = "login"
+            window.location.reload()
+        }
+        else{
+            window.location.href = "assets/pages/page_connexion.html"
+        }
+    })
+    // Mettre a jour le boutton login ou logout
+    if(storedToken){
+        btnLogin.textContent = "Logout"
+    }
+    else{
+        btnLogin.textContent = "login"
+    }
+}
+logInOut()

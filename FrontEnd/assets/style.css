@@ -62,6 +62,9 @@ header {
 .header_origin_margin{
 	margin: 50px 0px;
 }
+.login{
+	cursor: pointer;
+}
 /* Bandeau supérieur */
 .admin_mode{
 	position: absolute;
