@@ -307,12 +307,57 @@ footer nav ul {
 	height: 688px;
 	border-radius: 15px;
 }
+.modale__container .close_modale{
+	display: flex;
+	justify-content: end;
+	margin: 25px 25px 0 0;
+}
+.modale__container i{
+	display: flex;
+	justify-content: end;
+	width: 15px;
+	cursor: pointer;
+	font-size: 20px;
+}
 .title__modale{
 	display: flex;
 	justify-content: center;
 	color: black;
+	margin-top: 20px;
 }
 
+.preview_projet{
+	margin: 50px auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 70%;
+}
+.preview_projet figure{
+	margin-right: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.preview_projet figure img{
+	width: 76px;
+	height: 102px;
+	z-index: 1;
+}
+.preview_projet figure i{
+	position: relative;
+	left: 58px;
+	bottom: 98px;
+	width: 15px;
+	height: 15px;
+	z-index: 2;
+	font-size: 10px;
+	color: white;
+	background: black;
+	justify-content: center;
+	align-items: center;
+	border-radius: 3px;
+}
 
 .line__modale{
 	border-top: 1px solid #B3B3B3;
@@ -329,7 +374,7 @@ footer nav ul {
 	color: white;
 	background-color: #1D6154;
 	margin: auto;
-	margin-top: 10px;
+	margin-top: 40px;
 	padding: 10px 40px;
 	width: auto;
 	text-align: center;

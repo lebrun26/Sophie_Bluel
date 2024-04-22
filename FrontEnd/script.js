@@ -113,3 +113,22 @@ function logInOut(){
     }
 }
 logInOut()
+
+// Modale génération des projets avec petite poubelle.
+const containerModaleProjet = document.querySelector(".preview_projet")
+function modaleProjet(container){
+    for(let i = 0; i < projet.length; i++){
+        const projetAccueil = projet[i]
+        const figure = document.createElement("figure")
+        const img = document.createElement("img")
+        img.src = projetAccueil.imageUrl
+        figure.appendChild(img)
+        // Poubelle
+        const trash = document.createElement("i")
+        trash.classList.add("fa-solid", "fa-trash-can")
+        figure.appendChild(trash)
+
+        containerModaleProjet.appendChild(figure)
+    } 
+}
+modaleProjet(projet)
