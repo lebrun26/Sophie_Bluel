@@ -284,7 +284,7 @@ footer nav ul {
 /* Modale Ajout/Suppression */
 
 /* Display none */
-.modal_admin{
+.modale_admin{
 	display: none;
 }
 /*//////////////////////////////////////////*/
@@ -312,7 +312,7 @@ footer nav ul {
 	justify-content: end;
 	margin: 25px 25px 0 0;
 }
-.modale__container i{
+.modale__container .close_modale i{
 	display: flex;
 	justify-content: end;
 	width: 15px;
@@ -328,7 +328,7 @@ footer nav ul {
 
 .preview_projet{
 	margin: 50px auto;
-	display: flex;
+	display: none; /* Faut penser a remettre en flex ! */
 	flex-direction: row;
 	flex-wrap: wrap;
 	width: 70%;
@@ -358,7 +358,57 @@ footer nav ul {
 	align-items: center;
 	border-radius: 3px;
 }
+/* Ajout suppression: modale 2 */
 
+.add_projet{
+	display: flex;
+	flex-direction: column;
+}
+.btn_add{
+	width: 420px;
+	height: 169px;
+	margin: 35px auto;
+	z-index: 0;
+	border: none;
+	background: #E8F1F6;
+}
+.btn_add_picture{
+	position: absolute;
+	top: 222px;
+	left: 226px;
+	z-index: 0;
+	border: 1px solid #CBD6DC;
+	width: 173px;
+	height: 36px;
+	border-radius: 30px;
+	color: #306685;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #CBD6DC;
+	font-family: "Work sans", sans-serif;
+	font-weight: bold;
+}
+.fa-image{
+	display: flex;
+	justify-content: center;
+	font-size: 72px;
+	margin-bottom: 18px;
+	color: #B9C5CC;
+}
+#picture{
+	position: relative;
+	opacity: 0;
+	z-index: 1;
+	width: 170px;
+	margin-bottom: 10px;
+}
+.forma_accepted{
+	margin-top: 10px;
+	color: #444444;
+}
+
+/*//////////////////////////////////////*/
 .line__modale{
 	border-top: 1px solid #B3B3B3;
 	width: 420px;
