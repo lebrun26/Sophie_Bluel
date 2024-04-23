@@ -354,6 +354,7 @@ footer nav ul {
 	font-size: 10px;
 	color: white;
 	background: black;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	border-radius: 3px;
@@ -407,7 +408,34 @@ footer nav ul {
 	margin-top: 10px;
 	color: #444444;
 }
+#label_title_add{
+	display: flex;
+	justify-content: center;
+	width: 233px;
+	margin-bottom: 10px;
+}
+#title_add_img{
+	margin: auto;
+	width: 420px;
+	height: 47px;
+	box-shadow: 0px 4px 14px 0px #00000017;
+	border: none;
 
+}
+#label_categories{
+	display: flex;
+	justify-content: center;
+	width: 263px;
+	margin: 18px 0;
+}
+#categories_add{
+	margin: 0 auto 65px auto;
+	width: 430px;
+	height: 51px;
+	border: none;
+	box-shadow: 0px 4px 14px 0px #00000017;
+
+}
 /*//////////////////////////////////////*/
 .line__modale{
 	border-top: 1px solid #B3B3B3;
