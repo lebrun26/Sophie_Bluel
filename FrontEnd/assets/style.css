@@ -328,7 +328,7 @@ footer nav ul {
 
 .preview_projet{
 	margin: 50px auto;
-	display: none; /* Faut penser a remettre en flex ! */
+	display: flex; /* Faut penser a remettre en flex ! */
 	flex-direction: row;
 	flex-wrap: wrap;
 	width: 70%;
@@ -362,7 +362,7 @@ footer nav ul {
 /* Ajout suppression: modale 2 */
 
 .add_projet{
-	display: flex;
+	display: none;/* Remettre le flex */
 	flex-direction: column;
 }
 .btn_add{

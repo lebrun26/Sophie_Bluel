@@ -35,7 +35,6 @@ btnTous.textContent = "Tous"
 filter.appendChild(btnTous)
 btnTous.addEventListener("click", () =>{
     console.log("Vous avez cliqué sur le bouton Tous")
-    // Faire verifier variable a pierre car elle n'est pas lu
     const tousfilter = projet.filter( (tous) =>{
         return projet
     
@@ -132,3 +131,38 @@ function modaleProjet(container){
     } 
 }
 modaleProjet(projet)
+
+// Ouvrir/Fermer modale
+
+const btnModif = document.querySelector("#btn_modif")
+const backgroundModale = document.querySelector(".background__modale")
+const containerModale = document.querySelector(".modale__container")
+function openModale(){
+    btnModif.addEventListener("click", () =>{
+        backgroundModale.classList.remove("modale_admin")
+        containerModale.classList.remove("modale_admin")
+    })
+}
+openModale()
+
+function closeModale(){
+    const close = document.querySelector(".close_modale")
+    close.addEventListener("click", () =>{
+        backgroundModale.classList.add("modale_admin")
+        containerModale.classList.add("modale_admin")
+    })
+}
+closeModale()
+
+// Passer de la modale 1 a la modale 2
+
+const btnModale = document.querySelector(".btn__modale")
+const modale1 = document.querySelector(".preview_projet")
+const modale2 = document.querySelector(".add_projet")
+function addPicture(){
+    btnModale.addEventListener("click", () =>{
+        modale1.style.display = "none"
+        modale2.style.display = "flex"
+    })
+}
+addPicture()
