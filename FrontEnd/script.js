@@ -115,7 +115,7 @@ logInOut()
 
 // Modale génération des projets avec petite poubelle.
 const containerModaleProjet = document.querySelector(".preview_projet")
-function modaleProjet(container){
+function modaleProjet(){
     for(let i = 0; i < projet.length; i++){
         const projetAccueil = projet[i]
         const figure = document.createElement("figure")
@@ -125,6 +125,7 @@ function modaleProjet(container){
         // Poubelle
         const trash = document.createElement("i")
         trash.classList.add("fa-solid", "fa-trash-can")
+        trash.setAttribute("projet-id", projetAccueil.id)
         figure.appendChild(trash)
 
         containerModaleProjet.appendChild(figure)
@@ -212,3 +213,31 @@ function previewUpload(){
     })
 }
 previewUpload()
+
+// Delete projet
+
+const trash = document.querySelectorAll(".fa-trash-can")
+trash.forEach(trash => {
+    trash.addEventListener("click", async (event) =>{
+        event.preventDefault()
+        const projetId = trash.getAttribute("projet-id")
+        await deleteWork(projetId, token)
+    })
+})
+
+async function deleteWork(id, token){
+    try {
+        await fetch(`http://localhost:5678/api/works/${id}`, {
+            method: "DELETE",
+            headers: {"Authorization": `Bearer ${token}`
+            }
+        })
+        console.log("Le projet a été supprimé avec succes.")
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
+// Voir pourquoi la modale ce ferme quand je supprime un projet
+    

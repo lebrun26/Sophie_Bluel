@@ -490,3 +490,6 @@ footer nav ul {
 	border: none;
 	cursor: pointer;
 }
+.fa-trash-can{
+	cursor: pointer;
+}
