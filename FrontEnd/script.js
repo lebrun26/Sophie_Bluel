@@ -146,7 +146,7 @@ function openModale(){
 openModale()
 
 function closeModale(){
-    const close = document.querySelector(".close_modale")
+    const close = document.querySelector(".fa-xmark")
     close.addEventListener("click", () =>{
         backgroundModale.classList.add("modale_admin")
         containerModale.classList.add("modale_admin")
@@ -159,10 +159,32 @@ closeModale()
 const btnModale = document.querySelector(".btn__modale")
 const modale1 = document.querySelector(".preview_projet")
 const modale2 = document.querySelector(".add_projet")
+const btnAdd = document.querySelector(".btn__modale__add")
+const backArrow = document.querySelector(".fa-arrow-left")
+const containerCloseModale = document.querySelector(".close_modale")
 function addPicture(){
     btnModale.addEventListener("click", () =>{
         modale1.style.display = "none"
         modale2.style.display = "flex"
+        btnModale.style.display = "none"
+        btnAdd.style.display = "flex"
+        backArrow.style.display = "block"
+        containerCloseModale.style.justifyContent = "space-between"
+        containerCloseModale.style.margin = "25px 25px 0 25px"
     })
 }
 addPicture()
+
+// Passer de la modale 2 a la modale 1
+function comeBack(){
+    backArrow.addEventListener("click", () =>{
+        modale1.style.display = "flex"
+        modale2.style.display = "none"
+        btnModale.style.display = "flex"
+        btnAdd.style.display = "none"
+        backArrow.style.display = "none"
+        containerCloseModale.style.justifyContent = "end"
+        containerCloseModale.style.margin ="25px 25px 0 0"
+    })
+}
+comeBack()

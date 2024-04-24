@@ -56,7 +56,7 @@
 	</section>
 	<div class="background__modale"></div>
 	<section class="modale__container">
-		<div class="close_modale"><i class="fa-solid fa-xmark"></i></div>
+		<div class="close_modale"><i class="fa-solid fa-arrow-left"></i><i class="fa-solid fa-xmark"></i></div>
 		<h2 class="title__modale">Galerie photo</h2>
 		<div class="preview_projet"></div>
 		<div class="add_projet">
@@ -67,9 +67,10 @@
 				<p class="forma_accepted">jpg, png: 4mo max</p>
 			</button>
 			<label id="label_title_add" for="title_add_img">Titre</label>
-			<input type="text" id="title_add_img" name="title_add_img">
+			<input type="text" id="title_add_img" name="title_add_img" required>
 			<label id="label_categories" for="categories_add">Catégorie</label>
-			<select name="categories_add" id="categories_add">
+			<select name="categories_add" id="categories_add" required
+			>
 				<option></option>
 				<option>Objets</option>
 				<option>Appartements</option>
@@ -78,6 +79,7 @@
 		</div>
 		<div class="line__modale"></div>
 		<button class="btn__modale">Ajouter une photo</button>
+		<button class="btn__modale__add">Valider</button>
 	</section>
 </main>
 

@@ -319,6 +319,9 @@ footer nav ul {
 	cursor: pointer;
 	font-size: 20px;
 }
+.modale__container .close_modale .fa-arrow-left{
+	display: none;
+}
 .title__modale{
 	display: flex;
 	justify-content: center;
@@ -454,6 +457,22 @@ footer nav ul {
 	margin: auto;
 	margin-top: 40px;
 	padding: 10px 40px;
+	width: auto;
+	text-align: center;
+	border-radius: 60px ;
+	border: none;
+	cursor: pointer;
+}
+.btn__modale__add{
+	display: none;
+	justify-content: center;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: auto;
+	margin-top: 40px;
+	padding: 10px 70px;
 	width: auto;
 	text-align: center;
 	border-radius: 60px ;
