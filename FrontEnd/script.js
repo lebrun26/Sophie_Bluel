@@ -157,6 +157,7 @@ function closeModale(){
         backArrow.style.display = "none"
         containerCloseModale.style.justifyContent = "end"
         containerCloseModale.style.margin ="25px 25px 0 0"
+        previewImage.src = ""
     })
 }
 closeModale()
@@ -192,6 +193,22 @@ function comeBack(){
         backArrow.style.display = "none"
         containerCloseModale.style.justifyContent = "end"
         containerCloseModale.style.margin ="25px 25px 0 0"
+        previewImage.src = ""
     })
 }
 comeBack()
+
+const upload = document.querySelector("#picture")
+const previewImage = document.querySelector("#preview")
+function previewUpload(){
+    upload.addEventListener("change", async () =>{
+        const file = await upload.files[0]
+        if(file){
+            previewImage.src = URL.createObjectURL(file)
+        }
+        else{
+            previewImage.src = ""
+        }
+    })
+}
+previewUpload()

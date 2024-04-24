@@ -65,6 +65,9 @@ header {
 .login{
 	cursor: pointer;
 }
+.login:hover{
+	font-weight: bold;
+}
 /* Bandeau supérieur */
 .admin_mode{
 	position: absolute;
@@ -331,7 +334,7 @@ footer nav ul {
 
 .preview_projet{
 	margin: 50px auto;
-	display: flex; /* Faut penser a remettre en flex ! */
+	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	width: 70%;
@@ -365,7 +368,7 @@ footer nav ul {
 /* Ajout suppression: modale 2 */
 
 .add_projet{
-	display: none;/* Remettre le flex */
+	display: none;
 	flex-direction: column;
 }
 .btn_add{
@@ -399,6 +402,14 @@ footer nav ul {
 	font-size: 72px;
 	margin-bottom: 18px;
 	color: #B9C5CC;
+}
+#preview{
+	max-width: 184px;
+	max-height: 200px;
+	position: absolute;
+	z-index: 3;
+	top: 125px;
+	right: 217px;
 }
 #picture{
 	position: relative;
