@@ -188,3 +188,7 @@ function comeBack(){
     })
 }
 comeBack()
+
+// Faire en sorte que quand on clique sur modifier pour ouvrir la modale,
+// il faut toujours retomber sur la modale 1 et pas la modale 2
+// même si on a fermer la modale sur la modale 2 !!!!!
