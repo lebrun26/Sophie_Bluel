@@ -150,11 +150,18 @@ function closeModale(){
     close.addEventListener("click", () =>{
         backgroundModale.classList.add("modale_admin")
         containerModale.classList.add("modale_admin")
+        modale1.style.display = "flex"
+        modale2.style.display = "none"
+        btnModale.style.display = "flex"
+        btnAdd.style.display = "none"
+        backArrow.style.display = "none"
+        containerCloseModale.style.justifyContent = "end"
+        containerCloseModale.style.margin ="25px 25px 0 0"
     })
 }
 closeModale()
 
-// Passer de la modale 1 a la modale 2
+// Passer de la modale 1 à la modale 2
 
 const btnModale = document.querySelector(".btn__modale")
 const modale1 = document.querySelector(".preview_projet")
@@ -188,7 +195,3 @@ function comeBack(){
     })
 }
 comeBack()
-
-// Faire en sorte que quand on clique sur modifier pour ouvrir la modale,
-// il faut toujours retomber sur la modale 1 et pas la modale 2
-// même si on a fermer la modale sur la modale 2 !!!!!
