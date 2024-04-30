@@ -60,26 +60,30 @@
 		<h2 class="title__modale">Galerie photo</h2>
 		<div class="preview_projet"></div>
 		<div class="add_projet">
-			<button class="btn_add">
-				<i class="fa-regular fa-image"></i>
-				<input type="file" id="picture" name="picture" accept="image/png, image/jpeg">
-				<img src="" alt="" id="preview">
-				<p class="btn_add_picture">+ Ajout photo</p>
-				<p class="forma_accepted">jpg, png: 4mo max</p>
-			</button>
-			<label id="label_title_add" for="title_add_img">Titre</label>
-			<input type="text" id="title_add_img" name="title_add_img" required>
-			<label id="label_categories" for="categories_add">Catégorie</label>
-			<select name="categories_add" id="categories_add" required>
-				<option></option>
-				<option>Objets</option>
-				<option>Appartements</option>
-				<option>Hotels & Restaurants</option>
-			</select>
+			<form id="formulaire_add_picture">
+				<button class="btn_add">
+					<i class="fa-regular fa-image"></i>
+					<input type="file" id="picture" name="picture" accept="image/png, image/jpeg">
+					<img src="" alt="" id="preview">
+					<p class="btn_add_picture">+ Ajout photo</p>
+					<p class="forma_accepted">jpg, png: 4mo max</p>
+				</button>
+				<label id="label_title_add" for="title_add_img">Titre</label>
+				<input type="text" id="title_add_img" name="title_add_img" required>
+				<label id="label_categories" for="categories_add">Catégorie</label>
+				<select name="categories_add" id="categories_add" required>
+					<option></option>
+					<option>Objets</option>
+					<option>Appartements</option>
+					<option>Hotels & Restaurants</option>
+				</select>
+				<div class="line__modale2"></div>
+				<input type="submit" value="Valider" class="btn__modale__add">
+			</form>
 		</div>
-		<div class="line__modale"></div>
+		<div class="line__modale1"></div>
 		<button class="btn__modale">Ajouter une photo</button>
-		<button class="btn__modale__add">Valider</button>
+		
 	</section>
 </main>
 

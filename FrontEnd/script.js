@@ -1,12 +1,16 @@
-const reponse = await fetch("http://localhost:5678/api/works")
-const projet = await reponse.json()
+
 const reponsecategory = await fetch("http://localhost:5678/api/categories")
 const categories = await reponsecategory.json()
-
+let imageWorks
 // Appel et mise en place des projets pour la page d'accueil
 const gallery = document.querySelector(".gallery")
 
-function genereProjet(projet){
+async function genereProjet(){
+    const reponse = await fetch("http://localhost:5678/api/works")
+    const projet = await reponse.json()
+    imageWorks = projet
+    
+    gallery.innerHTML = ""
     for(let i = 0; i < projet.length; i++){
         const projetAccueil = projet[i]
         const figure = document.createElement("figure")
@@ -19,8 +23,9 @@ function genereProjet(projet){
 
         gallery.appendChild(figure)
     } 
+    modaleProjet()
 }
-genereProjet(projet)
+genereProjet()
 
 
 // Filtre de la page
@@ -35,12 +40,12 @@ btnTous.textContent = "Tous"
 filter.appendChild(btnTous)
 btnTous.addEventListener("click", () =>{
     console.log("Vous avez cliqué sur le bouton Tous")
-    const tousfilter = projet.filter( (tous) =>{
-        return projet
+    const tousfilter = imageWorks.filter( (tous) =>{
+        return imageWorks
     
     })
     document.querySelector(".gallery").innerHTML = ""
-    genereProjet(projet)
+    genereProjet(imageWorks)
 })
 
 categories.forEach(category => {
@@ -52,7 +57,7 @@ categories.forEach(category => {
     // Ajout événements pour chaque bouton
     btnFilter.addEventListener("click", () => {
         console.log("Vous avez cliqué sur le bouton " + category.name);
-        const filterProjects = projet.filter(project => project.categoryId === category.id);
+        const filterProjects = imageWorks.filter(project => project.categoryId === category.id);
         document.querySelector(".gallery").innerHTML = "";
         genereProjet(filterProjects);
         console.log(filterProjects);
@@ -116,8 +121,9 @@ logInOut()
 // Modale génération des projets avec petite poubelle.
 const containerModaleProjet = document.querySelector(".preview_projet")
 function modaleProjet(){
-    for(let i = 0; i < projet.length; i++){
-        const projetAccueil = projet[i]
+    containerModaleProjet.innerHTML = ""
+    for(let i = 0; i < imageWorks.length; i++){
+        const projetAccueil = imageWorks[i]
         const figure = document.createElement("figure")
         const img = document.createElement("img")
         img.src = projetAccueil.imageUrl
@@ -129,9 +135,19 @@ function modaleProjet(){
         figure.appendChild(trash)
 
         containerModaleProjet.appendChild(figure)
-    } 
+    }
+    const trash = document.querySelectorAll(".fa-trash-can")
+    trash.forEach(trash => {
+    trash.addEventListener("click", async (event) =>{
+        console.log("click")
+        const projetId = trash.getAttribute("projet-id")
+        await deleteWork(projetId, token)
+    })
+    // remplir le select de la partie ajout photo de la category
+})
+
 }
-modaleProjet(projet)
+
 
 // Ouvrir/Fermer modale
 
@@ -171,6 +187,7 @@ const modale2 = document.querySelector(".add_projet")
 const btnAdd = document.querySelector(".btn__modale__add")
 const backArrow = document.querySelector(".fa-arrow-left")
 const containerCloseModale = document.querySelector(".close_modale")
+const lineModale1 = document.querySelector(".line__modale1")
 function addPicture(){
     btnModale.addEventListener("click", () =>{
         modale1.style.display = "none"
@@ -180,6 +197,7 @@ function addPicture(){
         backArrow.style.display = "block"
         containerCloseModale.style.justifyContent = "space-between"
         containerCloseModale.style.margin = "25px 25px 0 25px"
+        lineModale1.style.display = "none"
     })
 }
 addPicture()
@@ -195,6 +213,7 @@ function comeBack(){
         containerCloseModale.style.justifyContent = "end"
         containerCloseModale.style.margin ="25px 25px 0 0"
         previewImage.src = ""
+        lineModale1.style.display = "flex"
     })
 }
 comeBack()
@@ -216,14 +235,6 @@ previewUpload()
 
 // Delete projet
 
-const trash = document.querySelectorAll(".fa-trash-can")
-trash.forEach(trash => {
-    trash.addEventListener("click", async (event) =>{
-        event.preventDefault()
-        const projetId = trash.getAttribute("projet-id")
-        await deleteWork(projetId, token)
-    })
-})
 
 async function deleteWork(id, token){
     try {
@@ -233,11 +244,70 @@ async function deleteWork(id, token){
             }
         })
         console.log("Le projet a été supprimé avec succes.")
+        genereProjet()
     }
     catch(error){
         console.log(error)
     }
 }
+// Envoie d'une nouvelle photo
 
-// Voir pourquoi la modale ce ferme quand je supprime un projet
+const formulaireAddPicture = document.querySelector("#formulaire_add_picture")
+formulaireAddPicture.addEventListener("submit", async (event) =>{
+    event.preventDefault()
     
+    // Récupération de la saisie utilisateur
+    const pictureAdd = event.target.querySelector("[name=picture]").files[0]
+    const titleAdd = event.target.querySelector("[name=title_add_img]").value
+    const categoriesAdd = event.target.querySelector("[name=categories_add]").value
+    if(!pictureAdd || !titleAdd || !categoriesAdd){
+        console.error("Une erreur est survenue")
+    }
+    // Condition pour mettre le bon id sur le choix de category
+    let categoryId
+
+    if(categoriesAdd === "Objets" ){
+        categoryId = 1
+    }
+    else if (categoriesAdd === "Appartements"){
+        categoryId = 2
+    }
+    else if (categoriesAdd === "Hotels & Restaurants"){
+        categoryId = 3
+    }
+
+    // construction et preparation du formdata
+    const formulaireAdd = new FormData()
+    formulaireAdd.append("image", pictureAdd)
+    formulaireAdd.append("title", titleAdd)
+    formulaireAdd.append("category", categoryId)
+
+    // Voir les entrées
+    for (const pair of formulaireAdd.entries()){
+        console.log(pair[0] + "," + pair[1])
+    }
+
+    // Creation de la var headers
+    const headersAdd = new Headers()
+
+    headersAdd.set("Authorization", `Bearer ${token}`)
+
+    // Envoie des données a l'API
+    try {
+        const reponse = await fetch("http://localhost:5678/api/works", {
+            method: "POST", 
+            headers: headersAdd,
+            body: formulaireAdd
+        })
+        if (reponse.ok){
+            const data = await reponse.json()
+            console.log(data)
+        }
+        else {
+            console.error("Erreur lors de l'envoie des données à l'API")
+        }
+    }
+    catch (error){
+        console.error("Error", error)
+    }
+})

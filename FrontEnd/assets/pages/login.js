@@ -5,7 +5,7 @@ function sendLogin(){
     formulaireLogin.addEventListener("submit", async (event) =>{
         event.preventDefault()
 
-        // Récupération des valeurs saisies par l'utilisateur
+        // Récupération des valeurs saisie par l'utilisateur
         const email = event.target.querySelector("[name=email]").value
         const password = event.target.querySelector("[name=password]").value
 
