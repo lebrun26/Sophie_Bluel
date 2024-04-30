@@ -9,8 +9,9 @@ async function genereProjet(){
     const reponse = await fetch("http://localhost:5678/api/works")
     const projet = await reponse.json()
     imageWorks = projet
-    
+
     gallery.innerHTML = ""
+    console.log("test:", projet)
     for(let i = 0; i < projet.length; i++){
         const projetAccueil = projet[i]
         const figure = document.createElement("figure")
@@ -22,7 +23,7 @@ async function genereProjet(){
         figure.appendChild(figcaption)
 
         gallery.appendChild(figure)
-    } 
+    }
     modaleProjet()
 }
 genereProjet()
@@ -46,6 +47,7 @@ btnTous.addEventListener("click", () =>{
     })
     document.querySelector(".gallery").innerHTML = ""
     genereProjet(imageWorks)
+    console.log(imageWorks)
 })
 
 categories.forEach(category => {
@@ -58,7 +60,8 @@ categories.forEach(category => {
     btnFilter.addEventListener("click", () => {
         console.log("Vous avez cliqué sur le bouton " + category.name);
         const filterProjects = imageWorks.filter(project => project.categoryId === category.id);
-        document.querySelector(".gallery").innerHTML = "";
+        console.log("Projets filtrés :", filterProjects)
+        gallery.innerHTML = ""
         genereProjet(filterProjects);
         console.log(filterProjects);
     });
@@ -176,8 +179,25 @@ function closeModale(){
         containerCloseModale.style.margin ="25px 25px 0 0"
         previewImage.src = ""
     })
+    backgroundModale.addEventListener("click", () =>{
+        console.log("j'ai cliqué !")
+        backgroundModale.classList.add("modale_admin")
+        containerModale.classList.add("modale_admin")
+        modale1.style.display = "flex"
+        modale2.style.display = "none"
+        btnModale.style.display = "flex"
+        btnAdd.style.display = "none"
+        backArrow.style.display = "none"
+        containerCloseModale.style.justifyContent = "end"
+        containerCloseModale.style.margin ="25px 25px 0 0"
+        previewImage.src = ""
+
+    })
 }
 closeModale()
+// Fermeture de la modale en dehors de celle-ci
+
+
 
 // Passer de la modale 1 à la modale 2
 
