@@ -349,6 +349,7 @@ footer nav ul {
 	width: 76px;
 	height: 102px;
 	z-index: 1;
+	object-fit: cover;
 }
 .preview_projet figure i{
 	position: relative;

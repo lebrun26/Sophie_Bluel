@@ -11,7 +11,6 @@ async function genereProjet(){
     imageWorks = projet
 
     gallery.innerHTML = ""
-    console.log("test:", projet)
     for(let i = 0; i < projet.length; i++){
         const projetAccueil = projet[i]
         const figure = document.createElement("figure")
@@ -21,8 +20,8 @@ async function genereProjet(){
         const figcaption = document.createElement("figcaption")
         figcaption.textContent = projetAccueil.title
         figure.appendChild(figcaption)
-
         gallery.appendChild(figure)
+        console.log("test2",projet)
     }
     modaleProjet()
 }
@@ -45,25 +44,36 @@ btnTous.addEventListener("click", () =>{
         return imageWorks
     
     })
-    document.querySelector(".gallery").innerHTML = ""
+    gallery.innerHTML = ""
     genereProjet(imageWorks)
-    console.log(imageWorks)
 })
 
 categories.forEach(category => {
-    const btnFilter = document.createElement("button");
-    btnFilter.classList = "btn__filter";
-    btnFilter.textContent = category.name;
-    filter.appendChild(btnFilter);
+    const btnFilter = document.createElement("button")
+    btnFilter.classList = "btn__filter"
+    btnFilter.textContent = category.name
+    filter.appendChild(btnFilter)
 
     // Ajout événements pour chaque bouton
     btnFilter.addEventListener("click", () => {
         console.log("Vous avez cliqué sur le bouton " + category.name);
         const filterProjects = imageWorks.filter(project => project.categoryId === category.id);
-        console.log("Projets filtrés :", filterProjects)
         gallery.innerHTML = ""
-        genereProjet(filterProjects);
-        console.log(filterProjects);
+        for(let i = 0; i < filterProjects.length; i++){
+            const projetAccueil = filterProjects[i]
+            const figure = document.createElement("figure")
+            const img = document.createElement("img")
+            img.src = projetAccueil.imageUrl
+            figure.appendChild(img)
+            const figcaption = document.createElement("figcaption")
+            figcaption.textContent = projetAccueil.title
+            figure.appendChild(figcaption)
+            gallery.appendChild(figure)
+        }
+        // J'ai fait cela pour dépanner mais ce n'est pas bon donc voir avec pierre
+        //Comment corriger cela afin d'utiliser la fonction genereProjet()
+        /*genereProjet(filterProjects);
+        console.log("test", filterProjects)*/
     });
 });
 
@@ -195,9 +205,6 @@ function closeModale(){
     })
 }
 closeModale()
-// Fermeture de la modale en dehors de celle-ci
-
-
 
 // Passer de la modale 1 à la modale 2
 
@@ -252,6 +259,15 @@ function previewUpload(){
     })
 }
 previewUpload()
+
+// Ajout des option select
+const categoriesAdd = document.querySelector("#categories_add")
+
+categories.forEach(category => {
+    const option = document.createElement("option");
+    option.textContent = category.name;
+    categoriesAdd.appendChild(option);
+})
 
 // Delete projet
 
