@@ -387,6 +387,10 @@ footer nav ul {
 	z-index: 0;
 	border: none;
 	background: #E8F1F6;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 8px;
 }
 .btn_add_picture{
 	position: absolute;
@@ -406,10 +410,8 @@ footer nav ul {
 	font-weight: bold;
 }
 .fa-image{
-	display: flex;
-	justify-content: center;
 	font-size: 72px;
-	margin-bottom: 18px;
+	margin-bottom: 13px;
 	color: #B9C5CC;
 }
 #preview{
@@ -426,10 +428,11 @@ footer nav ul {
 	opacity: 0;
 	z-index: 1;
 	width: 170px;
-	margin-bottom: 10px;
+	height: 35px;
+	margin-bottom: 5px;
 }
 .forma_accepted{
-	margin-top: 10px;
+	margin-top: 7px;
 	color: #444444;
 }
 #label_title_add{
