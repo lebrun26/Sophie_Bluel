@@ -21,7 +21,6 @@ async function genereProjet(){
         figcaption.textContent = projetAccueil.title
         figure.appendChild(figcaption)
         gallery.appendChild(figure)
-        console.log("test2",projet)
     }
     modaleProjet()
 }
@@ -156,7 +155,6 @@ function modaleProjet(){
         const projetId = trash.getAttribute("projet-id")
         await deleteWork(projetId, token)
     })
-    // remplir le select de la partie ajout photo de la category
 })
 
 }
@@ -188,6 +186,8 @@ function closeModale(){
         containerCloseModale.style.justifyContent = "end"
         containerCloseModale.style.margin ="25px 25px 0 0"
         previewImage.src = ""
+        previewImage.style["min-width"] = ""
+        previewImage.style["min-height"] = ""
     })
     backgroundModale.addEventListener("click", () =>{
         console.log("j'ai cliqué !")
@@ -201,6 +201,8 @@ function closeModale(){
         containerCloseModale.style.justifyContent = "end"
         containerCloseModale.style.margin ="25px 25px 0 0"
         previewImage.src = ""
+        previewImage.style["min-width"] = ""
+        previewImage.style["min-height"] = ""
 
     })
 }
@@ -225,6 +227,7 @@ function addPicture(){
         containerCloseModale.style.justifyContent = "space-between"
         containerCloseModale.style.margin = "25px 25px 0 25px"
         lineModale1.style.display = "none"
+        // Ici mettre du style pour la preview de photo
     })
 }
 addPicture()
@@ -245,6 +248,8 @@ function comeBack(){
 }
 comeBack()
 
+// Preview de l'image ajouter dans le input type file
+
 const upload = document.querySelector("#picture")
 const previewImage = document.querySelector("#preview")
 function previewUpload(){
@@ -252,6 +257,8 @@ function previewUpload(){
         const file = await upload.files[0]
         if(file){
             previewImage.src = URL.createObjectURL(file)
+            previewImage.style["min-width"] = "176px"
+            previewImage.style["min-height"] = "168px"
         }
         else{
             previewImage.src = ""
@@ -286,6 +293,7 @@ async function deleteWork(id, token){
         console.log(error)
     }
 }
+
 // Envoie d'une nouvelle photo
 
 const formulaireAddPicture = document.querySelector("#formulaire_add_picture")
@@ -308,7 +316,7 @@ formulaireAddPicture.addEventListener("submit", async (event) =>{
     else if (categoriesAdd === "Appartements"){
         categoryId = 2
     }
-    else if (categoriesAdd === "Hotels & Restaurants"){
+    else if (categoriesAdd === "Hotels & restaurants"){
         categoryId = 3
     }
 
@@ -323,21 +331,17 @@ formulaireAddPicture.addEventListener("submit", async (event) =>{
         console.log(pair[0] + "," + pair[1])
     }
 
-    // Creation de la var headers
-    const headersAdd = new Headers()
-
-    headersAdd.set("Authorization", `Bearer ${token}`)
-
     // Envoie des données a l'API
     try {
         const reponse = await fetch("http://localhost:5678/api/works", {
             method: "POST", 
-            headers: headersAdd,
+            headers: {"Authorization": `Bearer ${token}`},
             body: formulaireAdd
         })
         if (reponse.ok){
             const data = await reponse.json()
             console.log(data)
+            genereProjet()
         }
         else {
             console.error("Erreur lors de l'envoie des données à l'API")

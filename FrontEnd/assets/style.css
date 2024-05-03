@@ -209,6 +209,10 @@ li:hover {
 
 .gallery img {
 	width: 100%;
+	min-width: 200px;
+	min-height: 490px;
+	max-height: 491px;
+	object-fit: cover;
 
 }
 #contact {
@@ -409,12 +413,13 @@ footer nav ul {
 	color: #B9C5CC;
 }
 #preview{
-	max-width: 184px;
-	max-height: 200px;
+	max-width: 177px;
+	max-height: 169px;
 	position: absolute;
 	z-index: 3;
-	top: 125px;
+	top: 130px;
 	right: 217px;
+	object-fit: cover;
 }
 #picture{
 	position: relative;
