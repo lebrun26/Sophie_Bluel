@@ -5,14 +5,29 @@ let imageWorks
 // Appel et mise en place des projets pour la page d'accueil
 const gallery = document.querySelector(".gallery")
 
-async function genereProjet(){
+// Appel de l'api
+async function callApi(){
     const reponse = await fetch("http://localhost:5678/api/works")
     const projet = await reponse.json()
     imageWorks = projet
+}
+callApi()
 
+async function callApiAndGenerateProjets(){
+    await callApi()
+    genereProjet()
+}
+callApiAndGenerateProjets()
+
+// fonction pour généré les projets
+
+async function genereProjet(projets = imageWorks){
+    if (!projets){
+        return
+    }
     gallery.innerHTML = ""
-    for(let i = 0; i < projet.length; i++){
-        const projetAccueil = projet[i]
+    for(let i = 0; i < projets.length; i++){
+        const projetAccueil = projets[i]
         const figure = document.createElement("figure")
         const img = document.createElement("img")
         img.src = projetAccueil.imageUrl
@@ -39,12 +54,8 @@ btnTous.textContent = "Tous"
 filter.appendChild(btnTous)
 btnTous.addEventListener("click", () =>{
     console.log("Vous avez cliqué sur le bouton Tous")
-    const tousfilter = imageWorks.filter( (tous) =>{
-        return imageWorks
-    
-    })
     gallery.innerHTML = ""
-    genereProjet(imageWorks)
+    genereProjet()
 })
 
 categories.forEach(category => {
@@ -58,21 +69,7 @@ categories.forEach(category => {
         console.log("Vous avez cliqué sur le bouton " + category.name);
         const filterProjects = imageWorks.filter(project => project.categoryId === category.id);
         gallery.innerHTML = ""
-        for(let i = 0; i < filterProjects.length; i++){
-            const projetAccueil = filterProjects[i]
-            const figure = document.createElement("figure")
-            const img = document.createElement("img")
-            img.src = projetAccueil.imageUrl
-            figure.appendChild(img)
-            const figcaption = document.createElement("figcaption")
-            figcaption.textContent = projetAccueil.title
-            figure.appendChild(figcaption)
-            gallery.appendChild(figure)
-        }
-        // J'ai fait cela pour dépanner mais ce n'est pas bon donc voir avec pierre
-        //Comment corriger cela afin d'utiliser la fonction genereProjet()
-        /*genereProjet(filterProjects);
-        console.log("test", filterProjects)*/
+        genereProjet(filterProjects);
     });
 });
 
@@ -165,6 +162,7 @@ function modaleProjet(){
 const btnModif = document.querySelector("#btn_modif")
 const backgroundModale = document.querySelector(".background__modale")
 const containerModale = document.querySelector(".modale__container")
+const close = document.querySelector(".fa-xmark")
 function openModale(){
     btnModif.addEventListener("click", () =>{
         backgroundModale.classList.remove("modale_admin")
@@ -173,40 +171,31 @@ function openModale(){
 }
 openModale()
 
-function closeModale(){
-    const close = document.querySelector(".fa-xmark")
-    close.addEventListener("click", () =>{
-        backgroundModale.classList.add("modale_admin")
-        containerModale.classList.add("modale_admin")
-        modale1.style.display = "flex"
-        modale2.style.display = "none"
-        btnModale.style.display = "flex"
-        btnAdd.style.display = "none"
-        backArrow.style.display = "none"
-        containerCloseModale.style.justifyContent = "end"
-        containerCloseModale.style.margin ="25px 25px 0 0"
-        previewImage.src = ""
-        previewImage.style["min-width"] = ""
-        previewImage.style["min-height"] = ""
-    })
-    backgroundModale.addEventListener("click", () =>{
-        console.log("j'ai cliqué !")
-        backgroundModale.classList.add("modale_admin")
-        containerModale.classList.add("modale_admin")
-        modale1.style.display = "flex"
-        modale2.style.display = "none"
-        btnModale.style.display = "flex"
-        btnAdd.style.display = "none"
-        backArrow.style.display = "none"
-        containerCloseModale.style.justifyContent = "end"
-        containerCloseModale.style.margin ="25px 25px 0 0"
-        previewImage.src = ""
-        previewImage.style["min-width"] = ""
-        previewImage.style["min-height"] = ""
+// fonction pour fermer la modale
 
-    })
+function closeModale() {
+    backgroundModale.classList.add("modale_admin")
+    containerModale.classList.add("modale_admin")
+    modale1.style.display = "flex"
+    modale2.style.display = "none"
+    btnModale.style.display = "flex"
+    btnAdd.style.display = "none"
+    backArrow.style.display = "none"
+    containerCloseModale.style.justifyContent = "end"
+    containerCloseModale.style.margin ="25px 25px 0 0"
+    previewImage.src = ""
+    previewImage.style["min-width"] = ""
+    previewImage.style["min-height"] = ""
 }
-closeModale()
+
+backgroundModale.addEventListener("click", () =>{
+    closeModale()
+})
+close.addEventListener("click", () =>{
+    closeModale()
+})
+
+
 
 // Passer de la modale 1 à la modale 2
 
@@ -287,7 +276,7 @@ async function deleteWork(id, token){
             }
         })
         console.log("Le projet a été supprimé avec succes.")
-        genereProjet()
+        callApiAndGenerateProjets()
     }
     catch(error){
         console.log(error)
@@ -339,9 +328,8 @@ formulaireAddPicture.addEventListener("submit", async (event) =>{
             body: formulaireAdd
         })
         if (reponse.ok){
-            const data = await reponse.json()
-            console.log(data)
-            genereProjet()
+            callApiAndGenerateProjets()
+            closeModale()
         }
         else {
             console.error("Erreur lors de l'envoie des données à l'API")
