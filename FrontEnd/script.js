@@ -216,7 +216,9 @@ function addPicture(){
         containerCloseModale.style.justifyContent = "space-between"
         containerCloseModale.style.margin = "25px 25px 0 25px"
         lineModale1.style.display = "none"
-        // Ici mettre du style pour la preview de photo
+
+        // Déclenchement manuel de l'événement "input" pour le champ de titre
+        titleFormAdd.dispatchEvent(new Event('input'))
     })
 }
 addPicture()
@@ -339,3 +341,35 @@ formulaireAddPicture.addEventListener("submit", async (event) =>{
         console.error("Error", error)
     }
 })
+
+// Activer deactiver boutton valider en fonction de la saisi des champs "ajout photo"
+
+const titleFormAdd = document.getElementById("title_add_img")
+const pictureFormAdd = document.getElementById("picture")
+const categoryFormAdd = document.getElementById("categories_add")
+const btnFormAdd = document.querySelector(".btn__modale__add")
+
+// Ecoute de chaque champs du formulaire
+
+titleFormAdd.addEventListener("input", validateForm)
+pictureFormAdd.addEventListener("change", validateForm)
+categoryFormAdd.addEventListener("change", validateForm)
+
+// Fonction pour valider le formulaire
+
+function validateForm() {
+    // Verification du contenue présent ou non dans les différentes sections du formulaire.
+    const titleFilled = titleFormAdd.value.trim() != ""
+    const pictureSelected = pictureFormAdd.files.length > 0
+    const categorySelected = categoryFormAdd.value != ""
+
+    // Activer/ Désactiver le bouton submit en fonction des champs remplis ou non 
+    if (titleFilled && pictureSelected && categorySelected){
+        btnFormAdd.removeAttribute("disabled")
+        btnFormAdd.style.backgroundColor = "#1D6154"
+    }
+    else {
+        btnFormAdd.setAttribute("disabled", "disabled")
+        btnFormAdd.style.backgroundColor = "grey"
+    }
+}

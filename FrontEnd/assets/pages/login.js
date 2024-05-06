@@ -10,9 +10,14 @@ function sendLogin(){
         const password = event.target.querySelector("[name=password]").value
 
         // Test si les données d'entrée son correct
-        if(!email || ! password){
-            console.error("Veuillez saisir un e-mail et un mot de passe valides.")
-            return
+        if(!email || !password){
+            const loginError = document.querySelector(".loginError")
+            if (!loginError.querySelector(".error-message")) {
+                const p = document.createElement("p")
+                p.className = "error-message"
+                p.textContent = "Email et/ou Mot de passe incorrect"
+                loginError.appendChild(p)
+            }
         }
 
         // Création de l'objet à envoyer
@@ -34,9 +39,10 @@ function sendLogin(){
             const token = data.token
             window.localStorage.setItem("token", token)
             window.location.href = "../../index.html"
+            console.log("Erreur de connexion rencontrée")
        }
        else{
-            const loginError = document.querySelector(".loginError")
+        const loginError = document.querySelector(".loginError")
             if (!loginError.querySelector(".error-message")) {
                 const p = document.createElement("p")
                 p.className = "error-message"
