@@ -39,7 +39,6 @@ function sendLogin(){
             const token = data.token
             window.localStorage.setItem("token", token)
             window.location.href = "../../index.html"
-            console.log("Erreur de connexion rencontrée")
        }
        else{
         const loginError = document.querySelector(".loginError")

@@ -53,7 +53,6 @@ btnTous.classList = "btn__filter"
 btnTous.textContent = "Tous"
 filter.appendChild(btnTous)
 btnTous.addEventListener("click", () =>{
-    console.log("Vous avez cliqué sur le bouton Tous")
     gallery.innerHTML = ""
     genereProjet()
 })
@@ -66,7 +65,6 @@ categories.forEach(category => {
 
     // Ajout événements pour chaque bouton
     btnFilter.addEventListener("click", () => {
-        console.log("Vous avez cliqué sur le bouton " + category.name);
         const filterProjects = imageWorks.filter(project => project.categoryId === category.id);
         gallery.innerHTML = ""
         genereProjet(filterProjects);
@@ -83,7 +81,6 @@ portfolio.insertBefore(filter, gallery)
 
 // Ajout ou suppression du mode admin
 const token = window.localStorage.getItem("token")
-console.log(token)
 function adminMode(){
     const headBandAdmin = document.querySelector(".admin_mode")
     const modifAdmin = document.querySelector("#btn_modif")
@@ -148,7 +145,6 @@ function modaleProjet(){
     const trash = document.querySelectorAll(".fa-trash-can")
     trash.forEach(trash => {
     trash.addEventListener("click", async (event) =>{
-        console.log("click")
         const projetId = trash.getAttribute("projet-id")
         await deleteWork(projetId, token)
     })
@@ -277,7 +273,6 @@ async function deleteWork(id, token){
             headers: {"Authorization": `Bearer ${token}`
             }
         })
-        console.log("Le projet a été supprimé avec succes.")
         callApiAndGenerateProjets()
     }
     catch(error){
@@ -296,7 +291,6 @@ formulaireAddPicture.addEventListener("submit", async (event) =>{
     const titleAdd = event.target.querySelector("[name=title_add_img]").value
     const categoriesAdd = event.target.querySelector("[name=categories_add]").value
     if(!pictureAdd || !titleAdd || !categoriesAdd){
-        console.error("Une erreur est survenue")
     }
     // Condition pour mettre le bon id sur le choix de category
     let categoryId
@@ -317,10 +311,6 @@ formulaireAddPicture.addEventListener("submit", async (event) =>{
     formulaireAdd.append("title", titleAdd)
     formulaireAdd.append("category", categoryId)
 
-    // Voir les entrées
-    for (const pair of formulaireAdd.entries()){
-        console.log(pair[0] + "," + pair[1])
-    }
 
     // Envoie des données a l'API
     try {
