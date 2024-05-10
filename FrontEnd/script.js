@@ -85,15 +85,18 @@ function adminMode(){
     const headBandAdmin = document.querySelector(".admin_mode")
     const modifAdmin = document.querySelector("#btn_modif")
     const header = document.querySelector("header")
+    const containerFilter = document.querySelector(".container__filter")
     const isAdmin = token !== null && token !== undefined
     if(isAdmin){
         headBandAdmin.classList.remove("admin_mode_disabled")
         modifAdmin.classList.remove("admin_mode_disabled")
+        containerFilter.style.display = "none"
     }
     else{
         headBandAdmin.classList.add("admin_mode_disabled")
         modifAdmin.classList.add("admin_mode_disabled")
         header.classList.add("header_origin_margin")
+        containerFilter.style.display = "flex"
     }
 }
 adminMode()

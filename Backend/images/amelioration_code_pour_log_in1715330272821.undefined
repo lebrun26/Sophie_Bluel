@@ -1,0 +1,47 @@
+function sendLogin() {
+    const formulaireLogin = document.querySelector(".form_login");
+    formulaireLogin.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        // Récupération des valeurs saisies par l'utilisateur
+        const email = event.target.querySelector("[name=email]").value;
+        const password = event.target.querySelector("[name=password]").value;
+
+        // Vérification des données d'entrée
+        if (!email || !password) {
+            console.error("Veuillez saisir un e-mail et un mot de passe valides.");
+            return;
+        }
+
+        // Création de l'objet à envoyer
+        const login = {
+            email: email,
+            password: password
+        };
+
+        // Création de la charge utile au format JSON
+        const chargeUtile = JSON.stringify(login);
+
+        // Appel de la fonction fetch avec toutes les informations nécessaires
+        fetch("http://localhost:5678/api/users/login", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: chargeUtile
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Une erreur s'est produite lors de la requête.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Traiter les données de la réponse ici
+            console.log(data);
+        })
+        .catch(error => {
+            console.error("Erreur lors de la requête fetch :", error);
+        });
+    });
+}
+
+sendLogin();
