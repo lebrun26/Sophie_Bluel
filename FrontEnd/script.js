@@ -1,6 +1,4 @@
 
-const reponsecategory = await fetch("http://localhost:5678/api/categories")
-const categories = await reponsecategory.json()
 let imageWorks
 // Appel et mise en place des projets pour la page d'accueil
 const gallery = document.querySelector(".gallery")
@@ -41,6 +39,8 @@ async function genereProjet(projets = imageWorks){
 }
 genereProjet()
 
+const reponsecategory = await fetch("http://localhost:5678/api/categories")
+const categories = await reponsecategory.json()
 
 // Filtre de la page
 
