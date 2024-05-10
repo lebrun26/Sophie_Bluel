@@ -246,11 +246,18 @@ function previewUpload(){
     upload.addEventListener("change", async () =>{
         const file = await upload.files[0]
         if(file){
-            previewImage.src = URL.createObjectURL(file)
-            previewImage.style["min-width"] = "176px"
-            previewImage.style["min-height"] = "168px"
-        }
-        else{
+        const isValidFile = checkFile(file)
+            if (isValidFile) {
+                previewImage.src = URL.createObjectURL(file)
+                previewImage.style["min-width"] = "176px"
+                previewImage.style["min-height"] = "168px"
+            } else {
+                // Affichage d'un message d'erreur si le fichier n'est pas valide
+                alert("Le fichier doit être un JPG ou un PNG et ne doit pas dépasser 4 Mo.")
+                upload.value = ""; // Efface la sélection du fichier
+                previewImage.src = "";
+            }
+        } else{
             previewImage.src = ""
         }
     })
@@ -282,6 +289,23 @@ async function deleteWork(id, token){
         console.log(error)
     }
 }
+
+// Checking du format de l'image et de la taille max 4mo
+function checkFile(file) {
+    const allowedTypes = ['image/jpeg', 'image/png']
+    const maxSize = 4 * 1024 * 1024; // 4 Mo en octets
+
+    // Vérification du type de fichier
+    if (!allowedTypes.includes(file.type)) {
+    }
+
+    // Vérification de la taille du fichier
+    if (file.size > maxSize) {
+    }
+
+    return false // Le fichier est un JPG ou PNG et respecte la taille maximale
+}
+
 
 // Envoie d'une nouvelle photo
 
