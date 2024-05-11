@@ -296,14 +296,7 @@ function checkFile(file) {
     const maxSize = 4 * 1024 * 1024; // 4 Mo en octets
 
     // Vérification du type de fichier
-    if (!allowedTypes.includes(file.type)) {
-    }
-
-    // Vérification de la taille du fichier
-    if (file.size > maxSize) {
-    }
-
-    return false // Le fichier est un JPG ou PNG et respecte la taille maximale
+    return (allowedTypes.includes(file.type) && file.size < maxSize) 
 }
 
 
